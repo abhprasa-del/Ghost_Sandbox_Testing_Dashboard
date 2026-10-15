@@ -1,0 +1,113 @@
+<p><a href="https://track.akamai.com/jira/browse/GREL-6321" title="Hats fields unreported for TCP but reported for QUIC" class="issue-link" data-issue-key="GREL-6321">GREL-6321</a> - Hats fields unreported for TCP but reported for QUIC</p>
+
+<p><b>ALSI version:</b> alsi22</p>
+
+<p><b><font color="#1b5e20">(Tests with DEFAULT metadata values)</font></b></p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Job</th>
+<th class='confluenceTh'>Job Status</th>
+<th class='confluenceTh'>Results</th>
+</tr>
+<tr>
+<td class='confluenceTd'><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Testing/2319/" class="external-link" target="_blank" rel="nofollow noopener">Sandbox-Testing #2319</a> </td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> See below downstream jobs' results </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox%20Perf/3398/" class="external-link" target="_blank" rel="nofollow noopener">PERF</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> Perf test passed, <a href="http://198.18.99.18:8000/local_runs/MGHostC64-22.6.4.6321-f2fc23cb925c61b6724dbee806ba54e9-RUNID%3A1791829196_10746%2C1791832639_10746%2C1791835183_10746-nobody.html" class="external-link" target="_blank" rel="nofollow noopener">Summary</a>, <a href="http://yap.plots.engr.akamai.com:8090/perf_analysis?baseline_runids=1789200863_10746,1789205282_10746,1789209782_10746&amp;feature_runids=1791829196_10746,1791832639_10746,1791835183_10746&amp;degradation_val=1" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+Ghost version: 22.6.4.6321-f2fc23cb925c61b6724dbee806ba54e9 </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Load/1994/" class="external-link" target="_blank" rel="nofollow noopener">LOAD</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> <a href="http://esptools.engr.akamai.com/mcs/newload/linux/sandbox_load/load_6321_2026-10-13_01-51-43.html" class="external-link" target="_blank" rel="nofollow noopener">Plots</a><br/>
+Ghost version: 22.6.4.6321-f2fc23cb925c61b6724dbee806ba54e9 </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ct.engr.akamai.com/job/dev_snd_trg_Sandbox_BATS/2244/" class="external-link" target="_blank" rel="nofollow noopener">BATS</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> <a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163930" class="external-link" target="_blank" rel="nofollow noopener">group-common-1</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163930&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163938" class="external-link" target="_blank" rel="nofollow noopener">group-common-2</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163938&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163908" class="external-link" target="_blank" rel="nofollow noopener">group-common-3</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163908&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163888" class="external-link" target="_blank" rel="nofollow noopener">group-ff</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163888&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163918" class="external-link" target="_blank" rel="nofollow noopener">group-essl</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163918&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163917" class="external-link" target="_blank" rel="nofollow noopener">group-il</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163917&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163951" class="external-link" target="_blank" rel="nofollow noopener">group-security</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163951&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163900" class="external-link" target="_blank" rel="nofollow noopener">group-rdc</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163900&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5582/" class="external-link" target="_blank" rel="nofollow noopener">ASAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5582-vivekv-22.6.4.6321-alsi22-f3e5795a25c83c98128782d02cdeadd0-GhostAsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5582-vivekv-22.6.4.6321-alsi22-f3e5795a25c83c98128782d02cdeadd0-GhostAsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/SMART/413/" class="external-link" target="_blank" rel="nofollow noopener">ASAN AURA</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> <a href="https://ffdevtest.engr.akamai.com:8080/bats/regular/yday?date=2026-10-12&amp;versions=22.6.4.6321" class="external-link" target="_blank" rel="nofollow noopener">BATS Dashboard</a><br/>
+                <a href="http://198.18.97.51:3001/?tab=version&amp;target=22.6.4.6321&amp;full=true" class="external-link" target="_blank" rel="nofollow noopener">ASAN Dashboard</a> <br/>
+                <a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/SMART/413/artifact/aura_recommended_tests.json" class="external-link" target="_blank" rel="nofollow noopener">AURA Recommended Tests</a></td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5583/" class="external-link" target="_blank" rel="nofollow noopener">LSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5583-vivekv-22.6.4.6321-alsi22-f3e5795a25c83c98128782d02cdeadd0-LsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5583-vivekv-22.6.4.6321-alsi22-f3e5795a25c83c98128782d02cdeadd0-LsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/SMART/414/" class="external-link" target="_blank" rel="nofollow noopener">LSAN AURA</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> <a href="https://ffdevtest.engr.akamai.com:8080/bats/regular/yday?date=2026-10-12&amp;versions=22.6.4.6321" class="external-link" target="_blank" rel="nofollow noopener">BATS Dashboard</a><br/>
+                <a href="http://198.18.97.51:3001/?tab=version&amp;target=22.6.4.6321&amp;full=true" class="external-link" target="_blank" rel="nofollow noopener">LSAN Dashboard</a> <br/>
+                <a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/SMART/414/artifact/aura_recommended_tests.json" class="external-link" target="_blank" rel="nofollow noopener">AURA Recommended Tests</a></td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5581/" class="external-link" target="_blank" rel="nofollow noopener">TSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5581-vivekv-22.6.4.6321-alsi22-f3e5795a25c83c98128782d02cdeadd0-TsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5581-vivekv-22.6.4.6321-alsi22-f3e5795a25c83c98128782d02cdeadd0-TsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://jenkins-essl.qa.akamai.com:8080/job/Sandbox-Baseline-Regression-Master/1097/" class="external-link" target="_blank" rel="nofollow noopener">Baseline Regression</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> UNSTABLE </td>
+<td class='confluenceTd'> FREEFLOW: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2161/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="https://siam.akadevqa.com/testplans/17473" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a><br/>
+SECURITY: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2162/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2162/artifact/artifacts/SECURITY_GREL-6321_2162.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17475" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a><br/>
+    ESSL: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2160/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2160/artifact/artifacts/ESSL_GREL-6321_2160.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17474" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a> </td>
+</tr>
+</tbody></table>
+</div>
+
+<h6><a name="Ghostcrashesifanycanbeseenhere"></a>Ghost crashes if any can be seen <a href="http://espcorefiles.engr.akamai.com/cgi-bin/showghostrolls.pl?version=22.6.4.6321" class="external-link" target="_blank" rel="nofollow noopener">here</a>.</h6>
+<h6><a name=""></a></h6>

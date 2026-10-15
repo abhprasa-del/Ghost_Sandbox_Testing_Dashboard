@@ -1,0 +1,71 @@
+<p><a href="https://track.akamai.com/jira/browse/GREL-6236" title="ghost suspension on initial load failure of ghost.sureroute.* channels" class="issue-link" data-issue-key="GREL-6236">GREL-6236</a> - ghost suspension on initial load failure of ghost.sureroute.* channels</p>
+
+<p><b>ALSI version:</b> alsi24</p>
+
+<p><b><font color="#1b5e20">(Tests with DEFAULT metadata values)</font></b></p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Job</th>
+<th class='confluenceTh'>Job Status</th>
+<th class='confluenceTh'>Results</th>
+</tr>
+<tr>
+<td class='confluenceTd'><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Testing/2239/" class="external-link" target="_blank" rel="nofollow noopener">Sandbox-Testing #2239</a> </td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> See below downstream jobs' results </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ct.engr.akamai.com/job/dev_snd_trg_Sandbox_BATS/2180/" class="external-link" target="_blank" rel="nofollow noopener">BATS</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> <a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=162953" class="external-link" target="_blank" rel="nofollow noopener">group-common-2</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=162953&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=162900" class="external-link" target="_blank" rel="nofollow noopener">group-ff</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=162900&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=162921" class="external-link" target="_blank" rel="nofollow noopener">group-essl</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=162921&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=162955" class="external-link" target="_blank" rel="nofollow noopener">group-il</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=162955&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=162917" class="external-link" target="_blank" rel="nofollow noopener">group-security</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=162917&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=162903" class="external-link" target="_blank" rel="nofollow noopener">group-rdc</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=162903&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+group-common-1: <a href="http://prod.jenkins-releasedevops-swift-ct.engr.akamai.com/job/adm_utl_trg_Sandbox_Server_Setup/18142/" class="external-link" target="_blank" rel="nofollow noopener">Gigas/setup failed</a><br/>
+group-common-3: <a href="http://prod.jenkins-releasedevops-swift-ct.engr.akamai.com/job/adm_utl_trg_Sandbox_Server_Setup/18140/" class="external-link" target="_blank" rel="nofollow noopener">Gigas/setup failed</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5381/" class="external-link" target="_blank" rel="nofollow noopener">ASAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5381-aksoo-22.6.5.6236-alsi24-47daf060f6d8180484d245230153be49-GhostAsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5381-aksoo-22.6.5.6236-alsi24-47daf060f6d8180484d245230153be49-GhostAsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5382/" class="external-link" target="_blank" rel="nofollow noopener">LSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5382-aksoo-22.6.5.6236-alsi24-47daf060f6d8180484d245230153be49-LsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5382-aksoo-22.6.5.6236-alsi24-47daf060f6d8180484d245230153be49-LsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5380/" class="external-link" target="_blank" rel="nofollow noopener">TSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget <a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5380/artifact/akamai/mghost-client-side/src/5380-aksoo-22.6.5.6236-alsi24-47daf060f6d8180484d245230153be49-TsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5380/artifact/akamai/mghost-client-side/src/5380-aksoo-22.6.5.6236-alsi24-47daf060f6d8180484d245230153be49-TsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://jenkins-essl.qa.akamai.com:8080/job/Sandbox-Baseline-Regression-Master/1040/" class="external-link" target="_blank" rel="nofollow noopener">Baseline Regression</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> TIMEOUT </td>
+<td class='confluenceTd'> <font color="#de350b">No information found</font> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<h6><a name="%28Notselected%3APERF%2CLOAD%29"></a>(Not selected: PERF, LOAD)</h6>
+<h6><a name="Ghostcrashesifanycanbeseenhere"></a>Ghost crashes if any can be seen <a href="http://espcorefiles.engr.akamai.com/cgi-bin/showghostrolls.pl?version=22.6.5.6236" class="external-link" target="_blank" rel="nofollow noopener">here</a>.</h6>
+<h6><a name=""></a></h6>

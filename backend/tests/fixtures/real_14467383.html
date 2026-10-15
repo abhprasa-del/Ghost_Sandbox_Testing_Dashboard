@@ -1,0 +1,73 @@
+<p><a href="https://track.akamai.com/jira/browse/GREL-6302" title="RDC enabled Ghost not honoring purge-via-invalidate." class="issue-link" data-issue-key="GREL-6302">GREL-6302</a> - RDC enabled Ghost not honoring purge-via-invalidate.</p>
+
+<p><b>ALSI version:</b> alsi24</p>
+
+<p><b><font color="#1b5e20">(Tests with DEFAULT metadata values)</font></b></p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Job</th>
+<th class='confluenceTh'>Job Status</th>
+<th class='confluenceTh'>Results</th>
+</tr>
+<tr>
+<td class='confluenceTd'><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Testing/2311/" class="external-link" target="_blank" rel="nofollow noopener">Sandbox-Testing #2311</a> </td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> See below downstream jobs' results </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ct.engr.akamai.com/job/dev_snd_trg_Sandbox_BATS/2237/" class="external-link" target="_blank" rel="nofollow noopener">BATS</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> <a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163875" class="external-link" target="_blank" rel="nofollow noopener">group-common-2</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163875&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163817" class="external-link" target="_blank" rel="nofollow noopener">group-common-3</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163817&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163803" class="external-link" target="_blank" rel="nofollow noopener">group-ff</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163803&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163836" class="external-link" target="_blank" rel="nofollow noopener">group-essl</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163836&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163820" class="external-link" target="_blank" rel="nofollow noopener">group-il</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163820&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163832" class="external-link" target="_blank" rel="nofollow noopener">group-security</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163832&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+<a href="http://ffdevtest.engr.akamai.com:8080/bats/regular/query?runid=163815" class="external-link" target="_blank" rel="nofollow noopener">group-rdc</a>: <a href="http://bats-ara.engr.akamai.com/main/bats_disp_runid?runid=163815&amp;network=FF&amp;lenient=off" class="external-link" target="_blank" rel="nofollow noopener">Analysis</a><br/>
+group-common-1: <font color="#de350b">No results found</font> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5566/" class="external-link" target="_blank" rel="nofollow noopener">ASAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5566-hdhabeka-22.6.3.6302-alsi24-4d9aff393e2bf42d730dc90a01778bd6-GhostAsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5566-hdhabeka-22.6.3.6302-alsi24-4d9aff393e2bf42d730dc90a01778bd6-GhostAsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5565/" class="external-link" target="_blank" rel="nofollow noopener">LSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5565-hdhabeka-22.6.3.6302-alsi24-4d9aff393e2bf42d730dc90a01778bd6-LsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5565-hdhabeka-22.6.3.6302-alsi24-4d9aff393e2bf42d730dc90a01778bd6-LsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5564/" class="external-link" target="_blank" rel="nofollow noopener">TSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5564-hdhabeka-22.6.3.6302-alsi24-4d9aff393e2bf42d730dc90a01778bd6-TsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5564-hdhabeka-22.6.3.6302-alsi24-4d9aff393e2bf42d730dc90a01778bd6-TsanBuild.bz2</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://jenkins-essl.qa.akamai.com:8080/job/Sandbox-Baseline-Regression-Master/1095/" class="external-link" target="_blank" rel="nofollow noopener">Baseline Regression</a></li>
+</ul>
+</td>
+<td class='confluenceTd'> Completed </td>
+<td class='confluenceTd'> SECURITY: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2136/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2136/artifact/artifacts/SECURITY_GREL-6302_2136.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17468" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a><br/>
+    ESSL: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2134/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2134/artifact/artifacts/ESSL_GREL-6302_2134.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17425" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a><br/>
+FREEFLOW: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2135/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2135/artifact/artifacts/FREEFLOW_GREL-6302_2135.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17426" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<h6><a name="%28Notselected%3APERF%2CLOAD%29"></a>(Not selected: PERF, LOAD)</h6>
+<h6><a name="Ghostcrashesifanycanbeseenhere"></a>Ghost crashes if any can be seen <a href="http://espcorefiles.engr.akamai.com/cgi-bin/showghostrolls.pl?version=22.6.3.6302" class="external-link" target="_blank" rel="nofollow noopener">here</a>.</h6>
+<h6><a name=""></a></h6>

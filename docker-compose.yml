@@ -1,0 +1,24 @@
+services:
+  # The PostgreSQL database is EXTERNAL (see DATABASE_URL in .env); use its IP, never localhost.
+  api:
+    build: ./backend
+    env_file: .env
+    restart: unless-stopped
+    expose:
+      - "8000"
+
+  sync:
+    build: ./backend
+    command: ["python", "-m", "app.worker"]
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - ./certs:/certs:ro
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "8080:80"

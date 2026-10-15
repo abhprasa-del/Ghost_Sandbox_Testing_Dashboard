@@ -1,0 +1,64 @@
+<p><a href="https://track.akamai.com/jira/browse/GREL-6162" title="Retain the request deny reason even when using set-deny-custom" class="issue-link" data-issue-key="GREL-6162">GREL-6162</a> - Retain the request deny reason even when using set-deny-custom</p>
+
+<p><b>ALSI version:</b> alsi24</p>
+
+<p><b><font color="#1b5e20">(Tests with DEFAULT metadata values)</font></b></p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Job</th>
+<th class='confluenceTh'>Job Status</th>
+<th class='confluenceTh'>Results</th>
+</tr>
+<tr>
+<td class='confluenceTd'><a href="https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Testing/2287/" class="external-link" target="_blank" rel="nofollow noopener">Sandbox-Testing #2287</a></td>
+<td class='confluenceTd'>Completed</td>
+<td class='confluenceTd'>See below downstream jobs' results</td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ct.engr.akamai.com/job/dev_snd_trg_Sandbox_BATS/2223/" class="external-link" target="_blank" rel="nofollow noopener">BATS</a></li>
+</ul>
+</td>
+<td class='confluenceTd'>Completed</td>
+<td class='confluenceTd'>See <a href="http://198.18.84.9/job/dev_snd_trg_Sandbox_BATS/2223/" class="external-link" target="_blank" rel="nofollow noopener">http://198.18.84.9/job/dev_snd_trg_Sandbox_BATS/2223/</a> </td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5521/" class="external-link" target="_blank" rel="nofollow noopener">ASAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'>Completed</td>
+<td class='confluenceTd'>wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5521-adsinha-22.6.3.6162-alsi24-90f7381253480c35032570efc26d3ba7-GhostAsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5521-adsinha-22.6.3.6162-alsi24-90f7381253480c35032570efc26d3ba7-GhostAsanBuild.bz2</a></td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5522/" class="external-link" target="_blank" rel="nofollow noopener">LSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'>Completed</td>
+<td class='confluenceTd'>wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5522-adsinha-22.6.3.6162-alsi24-90f7381253480c35032570efc26d3ba7-LsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5522-adsinha-22.6.3.6162-alsi24-90f7381253480c35032570efc26d3ba7-LsanBuild.bz2</a></td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://prod.jenkins-releasedevops-swift-ci.engr.akamai.com:8080/job/Hybrid_Sandbox_Build/5520/" class="external-link" target="_blank" rel="nofollow noopener">TSAN build</a></li>
+</ul>
+</td>
+<td class='confluenceTd'>Completed</td>
+<td class='confluenceTd'>wget --no-check-certificate <a href="https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5520-adsinha-22.6.3.6162-alsi24-90f7381253480c35032570efc26d3ba7-TsanBuild.bz2" class="external-link" target="_blank" rel="nofollow noopener">https://ghosthub.engr.akamai.com:9000/sandbox-binaries/5520-adsinha-22.6.3.6162-alsi24-90f7381253480c35032570efc26d3ba7-TsanBuild.bz2</a></td>
+</tr>
+<tr>
+<td class='confluenceTd'><ul>
+	<li><a href="http://jenkins-essl.qa.akamai.com:8080/job/Sandbox-Baseline-Regression-Master/1078/" class="external-link" target="_blank" rel="nofollow noopener">Baseline Regression</a></li>
+</ul>
+</td>
+<td class='confluenceTd'>Completed</td>
+<td class='confluenceTd'>FREEFLOW: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2086/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2086/artifact/artifacts/FREEFLOW_GREL-6162_2086.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17372" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a><br/>
+ESSL: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2085/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2085/artifact/artifacts/ESSL_GREL-6162_2085.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17373" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a><br/>
+SECURITY: <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2087/" class="external-link" target="_blank" rel="nofollow noopener">Job Link</a> ~ <a href="http://jenkins-essl.qa.akamai.com/job/ESSL%20and%20FF%20Sandbox%20Baseline%20Regression%20(Jenkins)/2087/artifact/artifacts/SECURITY_GREL-6162_2087.html" class="external-link" target="_blank" rel="nofollow noopener">Report</a> ~ <a href="https://siam.akadevqa.com/testplans/17376" class="external-link" target="_blank" rel="nofollow noopener">SIAM Link</a></td>
+</tr>
+</tbody></table>
+</div>
+
+<h6><a name="%28Notselected%3APERF%2CLOAD%29"></a>(Not selected: PERF, LOAD)</h6>
+<h6><a name="%C2%A0"></a> </h6>
