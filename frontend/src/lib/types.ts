@@ -113,6 +113,7 @@ export interface JobResult {
   build_artifacts: BuildArtifact[];
   baseline_suites: BaselineSuite[];
   bats_groups?: BatsGroup[];
+  result_links?: { label: string; url: string }[];
 }
 
 export interface RunDetail {

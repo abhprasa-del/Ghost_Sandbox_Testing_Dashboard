@@ -40,12 +40,22 @@ function JobCard({ job, notSelected }: { job: JobResult; notSelected: boolean })
         <Badge tone={jobTone(job.job_status, job.outcome)}>{jobLabel(job.job_status, job.outcome, notSelected)}</Badge>
         {job.outcome && job.outcome !== "NA" && <span className="text-xs text-slate-500">{job.outcome}</span>}
       </div>
-      {job.result_text && job.build_artifacts.length === 0 && job.baseline_suites.length === 0 && !job.bats_groups?.length && <p className="mt-1 break-words text-xs text-slate-600 dark:text-slate-400">{job.result_text}</p>}
+      {job.result_text && job.build_artifacts.length === 0 && job.baseline_suites.length === 0 && !job.bats_groups?.length && !job.result_links?.length && <p className="mt-1 break-words text-xs text-slate-600 dark:text-slate-400">{job.result_text}</p>}
       <div className="mt-1 flex flex-wrap gap-3 text-xs">
         <Link href={job.summary_url}>Summary</Link>
         <Link href={job.analysis_url}>Analysis</Link>
         <Link href={job.plots_url}>Plots</Link>
       </div>
+      {!!job.result_links?.length && (
+        <div className="mt-1 flex flex-wrap items-center gap-x-1 text-xs">
+          {job.result_links.map((l, i) => (
+            <span key={l.url} className="flex items-center gap-1">
+              {i > 0 && <span className="text-slate-400">|</span>}
+              <Link href={l.url}>{l.label}</Link>
+            </span>
+          ))}
+        </div>
+      )}
       {!!job.bats_groups?.length && (
         <ul className="mt-1 space-y-0.5 text-xs">
           {job.bats_groups.map((g) => (

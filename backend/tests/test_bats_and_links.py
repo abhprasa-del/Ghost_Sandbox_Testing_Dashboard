@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy import text
 
 from app.main import create_app
-from app.parser import parse_bats_groups
+from app.parser import parse_bats_groups, parse_job_links
 from app.sync import store_comment
 from helpers import comment
 
@@ -59,3 +59,29 @@ def test_api_sandbox_build_url_and_bats_groups(clean_db, settings):
         assert len(jobs["BATS"]["bats_groups"]) == 8
         assert jobs["BATS"]["outcome"] == "NA"
         assert "bats_groups" not in jobs["PERF"]
+
+
+def test_aura_job_links_from_real_fixture():
+    html = (FIX / "real_14470555.html").read_text()
+    asan = parse_job_links(html, "ASAN AURA")
+    assert [l["label"] for l in asan] == ["BATS Dashboard", "ASAN Dashboard", "AURA Recommended Tests"]
+    assert all(l["url"].startswith("http") for l in asan)
+    lsan = parse_job_links(html, "LSAN AURA")
+    assert [l["label"] for l in lsan] == ["BATS Dashboard", "LSAN Dashboard", "AURA Recommended Tests"]
+
+
+def test_aura_job_without_links_returns_empty():
+    html = (FIX / "real_14490711.html").read_text()  # AURA jobs SKIPPED: text only
+    assert parse_job_links(html, "ASAN AURA") == []
+    assert parse_job_links(html, "NOPE") == []
+
+
+@pytest.mark.db
+def test_api_returns_result_links_for_aura_jobs_only(clean_db, settings):
+    store_comment(clean_db, settings, comment(1, "real_14470555.html"))
+    with TestClient(create_app(clean_db, settings)) as c:
+        rid = c.get("/api/runs").json()["items"][0]["run_id"]
+        jobs = {j["job_name"]: j for j in c.get("/api/runs/%d" % rid).json()["job_results"]}
+    assert len(jobs["ASAN AURA"]["result_links"]) == 3
+    assert len(jobs["LSAN AURA"]["result_links"]) == 3
+    assert "result_links" not in jobs["PERF"] and "result_links" not in jobs["ASAN build"]

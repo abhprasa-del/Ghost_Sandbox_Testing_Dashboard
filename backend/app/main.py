@@ -10,7 +10,7 @@ from sqlalchemy.engine import Engine
 from .config import Settings, get_settings
 from .db import check_dashboard_view, get_engine
 from .jobnames import CANONICAL_JOBS, JOB_NAME_MAP
-from .parser import parse_bats_groups
+from .parser import parse_bats_groups, parse_job_links
 from .models import (
     BaselineSuite, BuildArtifact, JobResult, SyncLog, TestRun, Ticket, v_dashboard,
 )
@@ -110,6 +110,8 @@ def create_app(engine: Engine | None = None, settings: Settings | None = None,
         for j in jobs:
             if j["job_name"] == "BATS":
                 j["bats_groups"] = parse_bats_groups(raw_html) if raw_html else []
+            elif j["job_name"] in ("ASAN AURA", "LSAN AURA"):
+                j["result_links"] = parse_job_links(raw_html, j["job_name"]) if raw_html else []
         jobs.sort(key=lambda j: _order(j["job_name"]))
         data["job_results"] = jobs
         return data

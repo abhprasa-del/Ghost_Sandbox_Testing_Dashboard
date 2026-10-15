@@ -91,6 +91,8 @@ Inside containers always use the server IP, never `localhost`.
 
 ## 2. Configure and run
 
+To run it on a server instead of your workstation, follow [DEPLOY.md](DEPLOY.md).
+
 ```bash
 cp .env.example .env     # fill in JIRA_TOKEN, DATABASE_URL password, SYNC_TOKEN
 docker compose up -d --build

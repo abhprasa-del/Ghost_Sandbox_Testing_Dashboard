@@ -286,3 +286,16 @@ def parse_bats_groups(html: str) -> list[dict]:
             note = text[m.end():].strip() or None
         groups.append({"name": name, "name_url": name_url, "links": links, "note": note})
     return groups
+
+
+def parse_job_links(html: str, job_name: str) -> list[dict]:
+    """All links in a job's result cell as [{label, url}], in the order of the Jira comment."""
+    soup = BeautifulSoup(html, "html.parser")
+    for tr in soup.find_all("tr"):
+        tds = tr.find_all("td", recursive=False)
+        if len(tds) == 3 and normalize_job_name(_clean(tds[0].get_text(" "))) == job_name:
+            return [
+                {"label": _clean(a.get_text(" ")), "url": a["href"]}
+                for a in tds[2].find_all("a", href=True)
+            ]
+    return []
