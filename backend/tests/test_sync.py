@@ -210,7 +210,7 @@ class _Session:
 
 def _jira_settings(**kw):
     base = dict(jira_base_url="https://j/jira", jira_browse_url="https://j/jira", jira_token="tok", jira_ssl_verify=True,
-                jira_ca_bundle=None, jira_client_cert=None, jira_client_key=None, database_url="", source_ticket="GREL-799", sync_token="",
+                jira_ca_bundle=None, jira_client_cert=None, jenkins_ca_bundle=None, jira_client_key=None, database_url="", source_ticket="GREL-799", sync_token="",
                 dashboard_tz="Asia/Kolkata", owner_refresh_days=14, jira_field_sqa=None,
                 jira_field_devqa=None)
     base.update(kw)

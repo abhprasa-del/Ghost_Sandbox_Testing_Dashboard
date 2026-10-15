@@ -11,6 +11,7 @@ from .config import Settings, get_settings
 from .db import check_dashboard_view, get_engine
 from .jobnames import CANONICAL_JOBS, JOB_NAME_MAP
 from .parser import parse_bats_groups, parse_job_links
+from .jenkins import fetch_started_by
 from .models import (
     BaselineSuite, BuildArtifact, JobResult, SyncLog, TestRun, Ticket, v_dashboard,
 )
@@ -87,7 +88,7 @@ def create_app(engine: Engine | None = None, settings: Settings | None = None,
         return CANONICAL_JOBS.index(name) if name in CANONICAL_JOBS else len(CANONICAL_JOBS)
 
     @app.get("/api/runs/{run_id}")
-    def run_detail(run_id: int, engine: Engine = Depends(eng)):
+    def run_detail(run_id: int, engine: Engine = Depends(eng), s: Settings = Depends(cfg)):
         with engine.connect() as conn:
             cat = category_expr(TestRun.run_id, TestRun.sandbox_status).label("category")
             run = conn.execute(
@@ -114,6 +115,7 @@ def create_app(engine: Engine | None = None, settings: Settings | None = None,
                 j["result_links"] = parse_job_links(raw_html, j["job_name"]) if raw_html else []
         jobs.sort(key=lambda j: _order(j["job_name"]))
         data["job_results"] = jobs
+        data["sandbox_started_by"] = fetch_started_by(data.get("sandbox_build_url"), s)
         return data
 
     @app.get("/api/tickets/{key}")

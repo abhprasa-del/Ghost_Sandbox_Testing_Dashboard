@@ -136,6 +136,7 @@ export interface RunDetail {
   commented_at: string;
   comment_edited: boolean | null;
   category: Category;
+  sandbox_started_by: string | null;
   job_results: JobResult[];
 }
 

@@ -117,6 +117,7 @@ function Details({ d, tz }: { d: RunDetail; tz: string }) {
         <span>
           <Link href={d.sandbox_build_url}>{d.sandbox_build_no ? `#${d.sandbox_build_no}` : "—"}</Link> {d.sandbox_status}
         </span>
+        <span className="text-slate-500">Started by user</span><span>{d.sandbox_started_by ?? "—"}</span>
         <span className="text-slate-500">Ghost version</span><span className="break-all">{d.ghost_version ?? "—"}</span>
         <span className="text-slate-500">Commented</span>
         <span>{formatFull(d.commented_at, tz)}{d.comment_edited ? " (edited)" : ""}</span>

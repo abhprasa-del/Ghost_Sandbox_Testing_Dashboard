@@ -21,6 +21,7 @@ class Settings:
     jira_ssl_verify: bool
     jira_ca_bundle: str | None
     jira_client_cert: str | None
+    jenkins_ca_bundle: str | None
     jira_client_key: str | None
     database_url: str
     source_ticket: str
@@ -45,6 +46,7 @@ def get_settings() -> Settings:
         jira_ssl_verify=_bool(e("JIRA_SSL_VERIFY"), True),
         jira_ca_bundle=e("JIRA_CA_BUNDLE") or None,
         jira_client_cert=e("JIRA_CLIENT_CERT") or None,
+        jenkins_ca_bundle=e("JENKINS_CA_BUNDLE") or None,
         jira_client_key=e("JIRA_CLIENT_KEY") or None,
         database_url=e("DATABASE_URL", ""),
         source_ticket=e("SOURCE_TICKET", "GREL-799"),

@@ -85,3 +85,77 @@ def test_api_returns_result_links_for_aura_jobs_only(clean_db, settings):
     assert len(jobs["ASAN AURA"]["result_links"]) == 3
     assert len(jobs["LSAN AURA"]["result_links"]) == 3
     assert "result_links" not in jobs["PERF"] and "result_links" not in jobs["ASAN build"]
+
+
+# -- "Started by user" (read from the Jenkins build API) ---------------------------------
+from app import jenkins  # noqa: E402
+
+REAL_CAUSES = {"actions": [
+    {"_class": "hudson.model.CauseAction", "causes": [
+        {"_class": "BuildUpstreamCause", "shortDescription": "Started by upstream project"},
+        {"_class": "hudson.model.Cause$UserIdCause", "userName": "Sai Rama Krishna Reddy Adidela"},
+        {"_class": "RebuildCause", "shortDescription": "Rebuilds build #2,365"}]},
+    {"_class": "hudson.model.ParametersAction"}]}
+
+
+class _Resp:
+    def __init__(self, data):
+        self.data = data
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self.data
+
+
+class _Sess:
+    def __init__(self, data=None, boom=False):
+        self.data, self.boom, self.calls = data, boom, []
+
+    def get(self, url, timeout=None, verify=None):
+        self.calls.append(url)
+        if self.boom:
+            raise RuntimeError("unreachable")
+        return _Resp(self.data)
+
+
+@pytest.fixture(autouse=False)
+def fresh_cache():
+    jenkins._FOUND.clear()
+    jenkins._FAILED.clear()
+
+
+def _settings():
+    from app.config import Settings
+    return Settings(
+        jira_base_url="https://j/jira", jira_browse_url="https://j/jira", jira_token="",
+        jira_ssl_verify=True, jira_ca_bundle=None, jira_client_cert=None, jenkins_ca_bundle=None,
+        jira_client_key=None, database_url="", source_ticket="GREL-799", sync_token="",
+        dashboard_tz="Asia/Kolkata", owner_refresh_days=14, jira_field_sqa=None, jira_field_devqa=None)
+
+
+def test_started_by_user_from_build_api(fresh_cache):
+    s = _Sess(REAL_CAUSES)
+    url = "https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Testing/2367/"
+    assert jenkins.fetch_started_by(url, _settings(), s) == "Sai Rama Krishna Reddy Adidela"
+    assert s.calls == [url.rstrip("/") + "/api/json?tree=actions[causes[userName]]"]
+    assert jenkins.fetch_started_by(url, _settings(), _Sess(boom=True)) == "Sai Rama Krishna Reddy Adidela"  # cached
+
+
+def test_started_by_none_when_no_user_cause_or_unreachable_or_bad_url(fresh_cache):
+    url = "https://ghost-test-cc.engr.akamai.com/jenkins/job/Sandbox-Testing/9/"
+    assert jenkins.fetch_started_by(url, _settings(), _Sess({"actions": [{"causes": [{"shortDescription": "Started by timer"}]}]})) is None
+    assert jenkins.fetch_started_by(url.replace("/9/", "/10/"), _settings(), _Sess(boom=True)) is None
+    assert jenkins.fetch_started_by(None, _settings(), _Sess(REAL_CAUSES)) is None
+    assert jenkins.fetch_started_by("ftp://x/job/1/", _settings(), _Sess(REAL_CAUSES)) is None
+    assert jenkins.fetch_started_by("https://x/other/1/", _settings(), _Sess(REAL_CAUSES)) is None
+
+
+@pytest.mark.db
+def test_api_run_detail_includes_started_by(clean_db, settings, monkeypatch):
+    store_comment(clean_db, settings, comment(1, "real_14470555.html"))
+    monkeypatch.setattr("app.main.fetch_started_by", lambda url, s: "Some User" if url else None)
+    with TestClient(create_app(clean_db, settings)) as c:
+        rid = c.get("/api/runs").json()["items"][0]["run_id"]
+        assert c.get("/api/runs/%d" % rid).json()["sandbox_started_by"] == "Some User"

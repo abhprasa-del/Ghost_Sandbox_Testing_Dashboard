@@ -39,7 +39,7 @@ class FakeJira:
 def make_settings():
     return Settings(
         jira_base_url="https://jira.example/jira", jira_browse_url="https://jira.example/jira", jira_token="t", jira_ssl_verify=True,
-        jira_ca_bundle=None, jira_client_cert=None, jira_client_key=None, database_url=os.environ["TEST_DATABASE_URL"],
+        jira_ca_bundle=None, jira_client_cert=None, jenkins_ca_bundle=None, jira_client_key=None, database_url=os.environ["TEST_DATABASE_URL"],
         source_ticket="GREL-799", sync_token="s", dashboard_tz="Asia/Kolkata",
         owner_refresh_days=14, jira_field_sqa=None, jira_field_devqa=None,
     )

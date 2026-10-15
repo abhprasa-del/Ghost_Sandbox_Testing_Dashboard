@@ -4,6 +4,8 @@ services:
     build: ./backend
     env_file: .env
     restart: unless-stopped
+    volumes:
+      - ./certs:/certs:ro
     expose:
       - "8000"
 
