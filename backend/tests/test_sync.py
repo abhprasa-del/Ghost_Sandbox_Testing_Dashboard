@@ -295,3 +295,87 @@ def test_recent_unchanged_comments_skipped_but_new_and_edited_are_written(clean_
     assert run_sync(clean_db, FakeJira([edited, comment(2, "real_14399901.html")], issues), settings)["upserted"] == 1
     assert q(clean_db, "SELECT outcome FROM job_results j JOIN test_runs r USING (run_id) "
                        "WHERE r.jira_comment_id='1' AND j.job_name='PERF'")[0][0] == "DEGRADED"
+
+
+# -- retries and worker scheduling ---------------------------------------------------------
+class _FlakySession(_Session):
+    def __init__(self, failures, error=None, status=None):
+        super().__init__()
+        self.failures, self.error, self.status = failures, error, status
+
+    def get(self, url, params=None, verify=None, timeout=None):
+        self.calls.append(url)
+        if len(self.calls) <= self.failures:
+            if self.error:
+                raise self.error
+            resp = _Resp({})
+            resp.status_code = self.status
+
+            def boom():
+                import requests
+                raise requests.HTTPError("HTTP %s" % self.status, response=resp)
+            resp.raise_for_status = boom
+            return resp
+        return _Resp({"ok": True})
+
+
+def _client(session, attempts=4):
+    return JiraClient(_jira_settings(), session, attempts=attempts, backoff=1.0, sleep=lambda s: slept.append(s))
+
+
+slept: list = []
+
+
+def test_jira_retries_dropped_connection_then_succeeds():
+    import requests
+    slept.clear()
+    s = _FlakySession(2, error=requests.exceptions.SSLError("EOF occurred in violation of protocol"))
+    assert _client(s).get_issue("GREL-1") == {"ok": True}
+    assert len(s.calls) == 3 and slept == [1.0, 2.0]
+
+
+def test_jira_gives_up_after_all_attempts():
+    import requests
+    slept.clear()
+    s = _FlakySession(99, error=requests.exceptions.ConnectionError("refused"))
+    with pytest.raises(requests.exceptions.ConnectionError):
+        _client(s, attempts=3).get_issue("GREL-1")
+    assert len(s.calls) == 3
+
+
+def test_jira_retries_503_but_not_401():
+    import requests
+    slept.clear()
+    s = _FlakySession(1, status=503)
+    assert _client(s).get_issue("GREL-1") == {"ok": True} and len(s.calls) == 2
+    s401 = _FlakySession(99, status=401)
+    with pytest.raises(requests.HTTPError):
+        _client(s401).get_issue("GREL-1")
+    assert len(s401.calls) == 1  # authentication errors are not retried
+
+
+def test_dropped_listener_during_sync_does_not_trigger_an_immediate_second_sync(clean_db, settings, monkeypatch):
+    import app.worker as worker_mod
+    import psycopg2
+    real_drain = worker_mod.drain
+    calls = []
+    raised = []
+
+    def flaky_drain(conn):
+        # the first drain after the sync is where a dropped connection shows up in real life
+        if calls and not raised:
+            raised.append(1)
+            raise psycopg2.OperationalError("SSL SYSCALL error: EOF detected")
+        return real_drain(conn)
+
+    monkeypatch.setattr(worker_mod, "drain", flaky_drain)
+    w = Worker(settings.database_url, lambda: calls.append(1), interval=3600, reconnect_delay=0.2)
+    t = threading.Thread(target=w.run_forever, daemon=True)
+    t.start()
+    assert _wait(lambda: raised)
+    time.sleep(3)  # long enough for the reconnect; the old behaviour started the next sync here
+    assert len(calls) == 1
+    w.stop.set()
+    with clean_db.begin() as c:
+        c.execute(text("SELECT pg_notify('ghost_sync','')"))
+    t.join(5)

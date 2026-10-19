@@ -40,13 +40,12 @@ class Worker:
             cur.execute("LISTEN %s" % NOTIFY_CHANNEL)
         return conn
 
-    def _run_one(self, conn):
+    def _run_one(self):
         try:
             self.sync_fn()
             self.syncs_run += 1
         except Exception:  # noqa: BLE001
             log.exception("sync crashed")
-        drain(conn)  # a burst of notifications yields at most one extra sync
 
     def run_forever(self):
         next_run = time.monotonic()  # sync once at startup
@@ -65,8 +64,11 @@ class Worker:
                     notified = drain(conn) > 0
                 if notified or time.monotonic() >= next_run:
                     drain(conn)
-                    self._run_one(conn)
+                    self._run_one()
+                    # Schedule first: the idle LISTEN connection may have been dropped during a long
+                    # sync, and the reconnect below must not trigger an immediate extra sync.
                     next_run = time.monotonic() + self.interval
+                    drain(conn)  # a burst of notifications yields at most one extra sync
             except (psycopg2.OperationalError, psycopg2.InterfaceError) as exc:
                 log.warning("listener connection lost (%s); reconnecting", exc)
                 if conn is not None:

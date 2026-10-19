@@ -1,9 +1,15 @@
+import logging
+import time
 from datetime import datetime
 from typing import Iterator
 
 import requests
 
 from .config import Settings
+
+log = logging.getLogger("ghost.jira")
+
+RETRY_STATUSES = (502, 503, 504)
 
 
 def parse_jira_time(value: str) -> datetime:
@@ -17,7 +23,11 @@ def parse_jira_time(value: str) -> datetime:
 
 
 class JiraClient:
-    def __init__(self, settings: Settings, session: requests.Session | None = None):
+    def __init__(self, settings: Settings, session: requests.Session | None = None,
+                 attempts: int = 4, backoff: float = 2.0, sleep=time.sleep):
+        self.attempts = attempts
+        self.backoff = backoff
+        self._sleep = sleep
         self.base = settings.jira_base_url
         self.verify = settings.jira_verify  # CA bundle path or bool; never forced to False
         self.session = session or requests.Session()
@@ -31,11 +41,24 @@ class JiraClient:
         self.session.headers["Accept"] = "application/json"
 
     def _get(self, path: str, **params):
-        r = self.session.get(
-            self.base + path, params=params or None, verify=self.verify, timeout=60
-        )
-        r.raise_for_status()
-        return r.json()
+        """GET with a few retries for dropped connections, timeouts and 502/503/504."""
+        for attempt in range(1, self.attempts + 1):
+            try:
+                r = self.session.get(
+                    self.base + path, params=params or None, verify=self.verify, timeout=60
+                )
+                r.raise_for_status()
+                return r.json()
+            except (requests.ConnectionError, requests.Timeout, requests.exceptions.ChunkedEncodingError,
+                    requests.HTTPError) as exc:
+                status = getattr(getattr(exc, "response", None), "status_code", None)
+                transient = not isinstance(exc, requests.HTTPError) or status in RETRY_STATUSES  # not 401/403/404
+                if not transient or attempt == self.attempts:
+                    raise
+                delay = self.backoff * 2 ** (attempt - 1)
+                log.warning("Jira request failed (%s), retry %d/%d in %.0fs: %s", path, attempt,
+                            self.attempts - 1, delay, str(exc)[:120])
+                self._sleep(delay)
 
     def iter_comments(self, ticket: str, page_size: int = 100) -> Iterator[dict]:
         start = 0
