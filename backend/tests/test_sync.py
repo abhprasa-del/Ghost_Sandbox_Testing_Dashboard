@@ -277,3 +277,21 @@ def test_old_unchanged_comments_are_not_rewritten(clean_db, settings):
     changed["renderedBody"] = changed["renderedBody"].replace("Perf test passed", "Perf test detected Degradations")
     assert run_sync(clean_db, FakeJira([changed]), settings)["upserted"] == 1
     assert q(clean_db, "SELECT outcome FROM job_results WHERE job_name='PERF'")[0][0] == "DEGRADED"
+
+
+def test_recent_unchanged_comments_skipped_but_new_and_edited_are_written(clean_db, settings):
+    issues = {"GREL-6321": {"fields": {"assignee": {"displayName": "Dev One"}}}}
+    first = comment(1, "real_14470555.html")  # created now, i.e. inside the 14-day window
+    jira = FakeJira([first], issues)
+    assert run_sync(clean_db, jira, settings)["upserted"] == 1
+
+    jira2 = FakeJira([first, comment(2, "real_14399901.html")], issues)
+    res = run_sync(clean_db, jira2, settings)
+    assert res["upserted"] == 1 and res["seen"] == 2  # only the new comment is written
+    assert q(clean_db, "SELECT count(*) FROM test_runs")[0][0] == 2
+    assert "GREL-6321" in jira2.fetched  # owners of recent tickets are still refreshed
+
+    edited = dict(first, renderedBody=first["renderedBody"].replace("Perf test passed", "Perf test detected Degradations"))
+    assert run_sync(clean_db, FakeJira([edited, comment(2, "real_14399901.html")], issues), settings)["upserted"] == 1
+    assert q(clean_db, "SELECT outcome FROM job_results j JOIN test_runs r USING (run_id) "
+                       "WHERE r.jira_comment_id='1' AND j.job_name='PERF'")[0][0] == "DEGRADED"

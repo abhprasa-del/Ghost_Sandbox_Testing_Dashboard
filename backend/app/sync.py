@@ -215,11 +215,12 @@ def _sync_locked(engine: Engine, jira, settings: Settings) -> dict:
         ).scalar_one()
         existing = set(conn.execute(select(Ticket.ticket_key)).scalars())
         cutoff = datetime.now(timezone.utc) - timedelta(days=settings.owner_refresh_days)
-        # Old runs whose comment text is unchanged are not rewritten (keeps big first syncs short).
+        # Runs whose comment text is unchanged are not rewritten, so only new or edited comments
+        # are written and a sync takes seconds instead of minutes against a remote database.
         unchanged = {
             cid: digest for cid, digest in conn.execute(
                 select(TestRun.jira_comment_id, func.md5(TestRun.raw_html))
-                .where(TestRun.raw_html.is_not(None), TestRun.commented_at < cutoff))
+                .where(TestRun.raw_html.is_not(None)))
         }
     errors: list[str] = []
     seen = upserted = skipped = 0
